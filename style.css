@@ -3,18 +3,29 @@ body{
 }
 #wrap {
 
-    width: 780px;
+    width: 1100px;
     margin: 0 auto;
 }
 
-#catImg{
+#cat1, #cat2 {
+    display: inline-block;
+}
+
+#catImg1 {
     border-radius: 10px;
     border: 2px solid crimson;
-    margin: 0 auto;
-    width: 700px;
-    height: 500px;
+    width: 500px;
+    height: 300px;
+    margin: 5px;
 }
-#count {
+#catImg2 {
+    border-radius: 10px;
+    border: 2px solid crimson;
+    width: 500px;
+    height: 300px;
+    margin: 5px;
+}
+#count1, #count2 {
     width: 100px;
     height: 100px;
     border-radius: 100%;
@@ -26,6 +37,9 @@ body{
     padding: 10px;
 }
 
-h1{
+h1 {
+    text-align: center;
+}
+h2 {
     text-align: center;
 }

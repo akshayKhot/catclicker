@@ -3,15 +3,25 @@
  */
 
 
-//get the handle on image
-var img = document.getElementById("catImg");
-//get a handle on the count div
-var count = document.getElementById("count");
-var number = parseInt(count.innerHTML);
+//get the handle on images
+var cat1 = document.getElementById("catImg1");
+var cat2 = document.getElementById("catImg2");
 
-//add event on image click
-img.addEventListener("click", function() {
-    number += 1;
-    count.innerHTML = number;
+//get a handle on the count divs
+var count1 = document.getElementById("count1");
+var count2 = document.getElementById("count2");
+
+var number1 = parseInt(count1.innerHTML);
+var number2 = parseInt(count2.innerHTML);
+
+//add event on image clicks
+cat1.addEventListener("click", function() {
+    number1 += 1;
+    count1.innerHTML = number1;
     });
+cat2.addEventListener("click", function() {
+    number2 += 1;
+    count2.innerHTML = number2;
+});
+
 
