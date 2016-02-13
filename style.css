@@ -1,0 +1,31 @@
+body{
+    background-color: aliceblue;
+}
+#wrap {
+
+    width: 780px;
+    margin: 0 auto;
+}
+
+#catImg{
+    border-radius: 10px;
+    border: 2px solid crimson;
+    margin: 0 auto;
+    width: 700px;
+    height: 500px;
+}
+#count {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: chocolate;
+    color: wheat;
+    font-size: 2em;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+}
+
+h1{
+    text-align: center;
+}
