@@ -2,6 +2,13 @@
  * Created by akshaykhot on 2016-02-13.
  */
 
+var name1 = "Fossie";
+var name2 = "Bootsie";
+
+//set the names for the cats
+document.getElementById("name1").innerHTML = name1;
+document.getElementById("name2").innerHTML = name2;
+
 
 //get the handle on images
 var cat1 = document.getElementById("catImg1");
