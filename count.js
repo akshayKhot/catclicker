@@ -2,33 +2,26 @@
  * Created by akshaykhot on 2016-02-13.
  */
 
-var name1 = "Fossie";
-var name2 = "Bootsie";
+var cats = {
+    "Fossie": "https://www.petfinder.com/wp-content/uploads/2012/11/140272627-grooming-needs-senior-cat-632x475.jpg",
+    "Bootsie": "https://pbs.twimg.com/profile_images/378800000532546226/dbe5f0727b69487016ffd67a6689e75a.jpeg",
+    "Meow": "https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg",
+    "Ruby": "http://breadedcat.com/wp-content/uploads/2012/02/cat-breading-tutorial-004.jpg",
+    "Genie": "http://i3.mirror.co.uk/incoming/article99763.ece/ALTERNATES/s615/a-bengal-cat-935179217.jpg"
+}
 
-//set the names for the cats
-document.getElementById("name1").innerHTML = name1;
-document.getElementById("name2").innerHTML = name2;
+var catNodes = document.getElementsByClassName("cat");
+for(var i=0; i<catNodes.length; i++) {
+    catNodes[i].addEventListener("click", function() {
+        //set the name for the cat
+        var catName = this.innerHTML;
+        document.getElementById("name").innerHTML = catName;
 
+        //set the image
+        var catImg = document.getElementById("catImg");
+        catImg.setAttribute("src", cats[catName]);
+    })
+}
 
-//get the handle on images
-var cat1 = document.getElementById("catImg1");
-var cat2 = document.getElementById("catImg2");
-
-//get a handle on the count divs
-var count1 = document.getElementById("count1");
-var count2 = document.getElementById("count2");
-
-var number1 = parseInt(count1.innerHTML);
-var number2 = parseInt(count2.innerHTML);
-
-//add event on image clicks
-cat1.addEventListener("click", function() {
-    number1 += 1;
-    count1.innerHTML = number1;
-    });
-cat2.addEventListener("click", function() {
-    number2 += 1;
-    count2.innerHTML = number2;
-});
 
 
