@@ -5,26 +5,26 @@
 var cats = {
     "Fossie": {
         name: "Fossie",
-        url: "https://www.petfinder.com/wp-content/uploads/2012/11/140272627-grooming-needs-senior-cat-632x475.jpg",
+        url: "http://www.catchannel.com/images/hamilton-hipster-cat-movember.jpg",
         count: 0
     },
     "Bootsie": {
-        name: "Fossie",
-        url: "https://pbs.twimg.com/profile_images/378800000532546226/dbe5f0727b69487016ffd67a6689e75a.jpeg",
+        name: "Bootsie",
+        url: "https://pixabay.com/static/uploads/photo/2015/10/25/09/30/cat-1005489_960_720.jpg",
         count: 0
     },
     "Meow": {
-        name: "Fossie",
-        url: "https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg",
+        name: "Meow",
+        url: "http://superbpix.com/files/funzug/imgs/walls/big/cute_cats_wal_03.jpg",
         count: 0
     },
     "Ruby": {
-        name: "Fossie",
+        name: "Ruby",
         url: "http://breadedcat.com/wp-content/uploads/2012/02/cat-breading-tutorial-004.jpg",
         count: 0
     },
     "Genie": {
-        name: "Fossie",
+        name: "Genie",
         url: "http://images4.fanpop.com/image/photos/16000000/Beautiful-Cat-cats-16096437-1280-800.jpg",
         count: 0
     },
