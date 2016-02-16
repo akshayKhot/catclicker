@@ -43,6 +43,7 @@ var model = {
 //it also contains information about the current cat
 model.currentCat = model.cats[0];
 
+
 //==============================================================================================================================
 
 var controller = {
@@ -58,7 +59,7 @@ var controller = {
     getCurrent: function() {
         return model.currentCat;
     },
-    //update the current cat whenever user clicks on a cat
+    //update the current cat whenever user clicks on a cat name
     update: function(catName) {
         //traverse through the cats array in model to find the cat object having catName as its name
         var catsArr = model.cats;
@@ -67,9 +68,23 @@ var controller = {
             if(catsArr[i].name == catName)
                 model.currentCat = catsArr[i];
         }
-        console.log("Current Cat: " + model.currentCat.name);
+        //console.log("Current Cat: " + model.currentCat.name);
         //after updating the current cat, render view2 to display its information
         view2.render();
+        view3.render();
+    },
+    //update the counter for the clicked cat
+    increment: function() {
+        //get the current cat which was clicked
+        console.log(model.currentCat.name);
+        var catsArr = model.cats;
+        var currentCat;
+        for(var i=0; i<catsArr.length; i++) {
+            if(catsArr[i].name == model.currentCat.name)
+                model.currentCat.count++;
+        }
+        view2.render();
+        view3.render();
     }
 
 };
@@ -93,6 +108,7 @@ var view1 = {
         console.log(catHTML);
         listOfCats.innerHTML = catHTML;
         view2.render();
+        view3.render();
 
         //whenever someone clicks on a cat name in the list,
         //tell the controller to update the model
@@ -102,8 +118,12 @@ var view1 = {
                 controller.update(this.innerHTML);
             });
         }
-
-
+        //Whenever someone clicks on the image of a cat
+        //tell the controller to increment the counter of that cat
+        var imgNode = document.getElementById("catImg");
+        imgNode.addEventListener("click", function(){
+            controller.increment();
+        });
     }
 };
 
@@ -116,14 +136,22 @@ var view2 = {
         //get a handle on name, image, and count nodes
         var nameNode = document.getElementById("name");
         var imgNode = document.getElementById("catImg");
-        var countNode = document.getElementById("count");
 
         nameNode.innerHTML = currentCat.name;
         imgNode.setAttribute("src", currentCat.url);
-        countNode.innerHTML = currentCat.count;
+
     }
 };
 
+/*Display the count*/
+var view3 = {
+    render: function() {
+        //ask the controller to get the current cat
+        var currentCat = controller.getCurrent();
+        var countNode = document.getElementById("count");
+        countNode.innerHTML = currentCat.count;
+    }
+};
 
 
 //==============================================================================================================================
