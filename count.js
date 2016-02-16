@@ -2,6 +2,8 @@
  * Created by akshaykhot on 2016-02-13.
  */
 
+
+
 /*model cats contains our data. In this case, it's an array of cat objects*/
 var model = {
     cats: [
@@ -55,6 +57,19 @@ var controller = {
     //tell model to get the current cat
     getCurrent: function() {
         return model.currentCat;
+    },
+    //update the current cat whenever user clicks on a cat
+    update: function(catName) {
+        //traverse through the cats array in model to find the cat object having catName as its name
+        var catsArr = model.cats;
+        var currentCat;
+        for(var i=0; i<catsArr.length; i++) {
+            if(catsArr[i].name == catName)
+                model.currentCat = catsArr[i];
+        }
+        console.log("Current Cat: " + model.currentCat.name);
+        //after updating the current cat, render view2 to display its information
+        view2.render();
     }
 
 };
@@ -77,8 +92,18 @@ var view1 = {
         }
         console.log(catHTML);
         listOfCats.innerHTML = catHTML;
-
         view2.render();
+
+        //whenever someone clicks on a cat name in the list,
+        //tell the controller to update the model
+        var catNames = document.getElementsByClassName("cat");
+        for(var i=0; i<catNames.length; i++) {
+            catNames[i].addEventListener("click", function() {
+                controller.update(this.innerHTML);
+            });
+        }
+
+
     }
 };
 
@@ -98,6 +123,8 @@ var view2 = {
         countNode.innerHTML = currentCat.count;
     }
 };
+
+
 
 //==============================================================================================================================
 
