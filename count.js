@@ -71,14 +71,7 @@ var controller = {
     },
     //update the counter for the clicked cat
     increment: function() {
-        //get the current cat which was clicked
-        console.log(model.currentCat.name);
-        var catsArr = model.cats;
-        var currentCat;
-        for(var i=0; i<catsArr.length; i++) {
-            if(catsArr[i].name == model.currentCat.name)
-                model.currentCat.count++;
-        }
+        model.currentCat.count++;
         view2.render();
         view3.render();
     }
