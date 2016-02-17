@@ -2,8 +2,6 @@
  * Created by akshaykhot on 2016-02-13.
  */
 
-
-
 /*model cats contains our data. In this case, it's an array of cat objects*/
 var model = {
     cats: [
@@ -43,7 +41,6 @@ var model = {
 //it also contains information about the current cat
 model.currentCat = model.cats[0];
 
-
 //==============================================================================================================================
 
 var controller = {
@@ -68,8 +65,7 @@ var controller = {
             if(catsArr[i].name == catName)
                 model.currentCat = catsArr[i];
         }
-        //console.log("Current Cat: " + model.currentCat.name);
-        //after updating the current cat, render view2 to display its information
+        //after updating the current cat, render view2 and view3 to display its information
         view2.render();
         view3.render();
     },
@@ -127,7 +123,7 @@ var view1 = {
     }
 };
 
-/*Display the cat name, image and count*/
+/*Display the cat name, image*/
 var view2 = {
     render: function() {
         //ask the controller to get the current cat
@@ -158,33 +154,6 @@ var view3 = {
 
 controller.init();
 
-/*
-var catNodes = document.getElementsByClassName("cat");
-var countNode = document.getElementById("count");
-var catImg = document.getElementById("catImg");;
-
-for(var i=0; i<catNodes.length; i++) {
-    catNodes[i].addEventListener("click", function() {
-        //set the name for the cat
-        var catName = this.innerHTML;
-        document.getElementById("name").innerHTML = catName;
-
-        //set the image
-        catImg.setAttribute("src", cats[catName].url);
-
-        //reset counter to 0
-        countNode.textContent = cats[catName].count;
-    });
-}
-
-catImg.addEventListener("click", function() {
-    //Get the text from the name tag
-    if(document.getElementById("name").textContent !== ""){
-        var catName = document.getElementById("name").textContent;
-        countNode.textContent = ++cats[catName].count;
-    }
-});
-*/
 
 
 
