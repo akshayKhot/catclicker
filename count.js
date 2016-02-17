@@ -4,6 +4,7 @@
 
 /*model cats contains our data. In this case, it's an array of cat objects*/
 var model = {
+    currentCat: null,
     cats: [
         {
             name: "Fossie",
@@ -31,44 +32,37 @@ var model = {
             count: 0
         }
     ],
-
-    //return all the cats
-    getCats: function() {
-        return this.cats;
-    }
-
 };
-//it also contains information about the current cat
-model.currentCat = model.cats[0];
+
 
 //==============================================================================================================================
 
 var controller = {
+
     //initialize the application
     init: function() {
+        //set the current cat to the first cat
+        model.currentCat = model.cats[0];
+
         view1.render();
+        view2.render();
+        view3.render();
     },
+
     //tell model to get all the cats
     getCats: function() {
-        return model.getCats();
+        return model.cats;
     },
+
     //tell model to get the current cat
     getCurrent: function() {
         return model.currentCat;
     },
-    //update the current cat whenever user clicks on a cat name
-    update: function(catName) {
-        //traverse through the cats array in model to find the cat object having catName as its name
-        var catsArr = model.cats;
-        var currentCat;
-        for(var i=0; i<catsArr.length; i++) {
-            if(catsArr[i].name == catName)
-                model.currentCat = catsArr[i];
-        }
-        //after updating the current cat, render view2 and view3 to display its information
-        view2.render();
-        view3.render();
+
+    setCurrentCat: function(cat) {
+      model.currentCat = cat;
     },
+
     //update the counter for the clicked cat
     increment: function() {
         model.currentCat.count++;
@@ -84,31 +78,34 @@ var controller = {
 var view1 = {
 
     render: function() {
+
+        var listOfCats = document.getElementById("catList");
         //ask the controller to get all the cats
         var cats = controller.getCats();
-        //get a handle on catlist
-        var listOfCats = document.getElementById("catList");
         //create a string having all the cats html
         var catHTML = "";
-        for (var cat in cats) {
-            var id = parseInt(cat)+1;
-            catHTML += "<li id='cat" + id + "' class='cat'>" + cats[cat].name + "</li>\n";
-        }
-        console.log(catHTML);
-        listOfCats.innerHTML = catHTML;
-        view2.render();
-        view3.render();
 
-        //whenever someone clicks on a cat name in the list,
-        //tell the controller to update the model
-        var catNames = document.getElementsByClassName("cat");
-        for(var i=0; i<catNames.length; i++) {
-            catNames[i].addEventListener("click", function() {
-                controller.update(this.innerHTML);
-            });
+        //loop over the cats
+        for(var i=0; i<cats.length; i++) {
+            var cat = cats[i];
+            //create a list element for that cat
+            var catNode = document.createElement("li");
+            catNode.className = "cat";
+            catNode.id = "cat" + i;
+            catNode.textContent = cat.name;
+            catNode.addEventListener("click", (function(catCopy) {
+                return function() {
+                    controller.setCurrentCat(catCopy);
+                    //after updating the current cat, render view2 and view3 to display its information
+                    view2.render();
+                    view3.render();
+                };
+            })(cat));
+
+            //add the cat in the list
+            listOfCats.appendChild(catNode);
         }
-        //Whenever someone clicks on the image of a cat
-        //tell the controller to increment the counter of that cat
+
         var imgNode = document.getElementById("catImg");
         imgNode.addEventListener("click", function(){
             controller.increment();
@@ -128,7 +125,6 @@ var view2 = {
 
         nameNode.innerHTML = currentCat.name;
         imgNode.setAttribute("src", currentCat.url);
-
     }
 };
 
