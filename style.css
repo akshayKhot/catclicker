@@ -61,16 +61,34 @@ li {
 #admin {
     position: fixed;
     border: 1px solid black;
+    padding: 10px;
+    background-color: cadetblue;
+    color: azure;
+    font-size: 1.1em;
 }
-/*#adminBtn {*/
-    /*width: 90px;*/
-    /*height:50px;*/
-    /*font-size: 1.3em;*/
-    /*padding: 5px;*/
-    /*background-color: chocolate;*/
-    /*color: white;*/
-    /*border-radius: 5px;*/
-/*}*/
+#adminBtn {
+    width: 90px;
+    height:40px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    padding: 5px;
+    background-color: chocolate;
+    color: white;
+    border-radius: 5px;
+}
+
+.form {
+    padding: 5px;
+    margin: 5px;
+}
+
+.formbtn {
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 1.1em;
+    background-color: chocolate;
+    color: white;
+}
 
 
 
