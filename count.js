@@ -48,6 +48,7 @@ var controller = {
         view1.render();
         view2.render();
         view3.render();
+        adminView.render();
     },
 
     //tell model to get all the cats
@@ -67,7 +68,7 @@ var controller = {
     //update the counter for the clicked cat
     increment: function() {
         model.currentCat.count++;
-        view2.render();
+        console.log("controller: updated counter to " + model.currentCat.count);
         view3.render();
     },
 
@@ -77,11 +78,11 @@ var controller = {
         //if the view is visible, hide it, else show it
         if(model.isVisible) {
             model.isVisible = false;
-            view1.hide();
+            adminView.hide();
         }
         else {
             model.isVisible = true;
-            view1.show();
+            adminView.show();
         }
     },
 
@@ -90,9 +91,6 @@ var controller = {
         model.currentCat.name = cat.name;
         model.currentCat.url = cat.url;
         model.currentCat.count = cat.count;
-        view1.render();
-        view2.render();
-        view3.render();
     }
 
 };
@@ -107,9 +105,7 @@ var view1 = {
         var listOfCats = document.getElementById("catList");
         //ask the controller to get all the cats
         var cats = controller.getCats();
-        //create a string having all the cats html
-        var catHTML = "";
-        view1.hide();
+        adminView.hide();
 
         //clear the list before adding new
         listOfCats.innerHTML = "";
@@ -136,29 +132,64 @@ var view1 = {
 
         var imgNode = document.getElementById("catImg");
         imgNode.addEventListener("click", function(){
+            console.log("view: will update the counter");
             controller.increment();
         });
+    }
+};
 
+/*Display the cat name, image*/
+var view2 = {
+    render: function() {
+        //ask the controller to get the current cat
+        var currentCat = controller.getCurrent();
+
+        //get a handle on name and image nodes
+        var nameNode = document.getElementById("name");
+        var imgNode = document.getElementById("catImg");
+
+        nameNode.innerHTML = currentCat.name;
+        imgNode.setAttribute("src", currentCat.url);
+    }
+};
+
+/*Display the count*/
+var view3 = {
+    render: function() {
+        //ask the controller to get the current cat
+        var currentCat = controller.getCurrent();
+        var countNode = document.getElementById("count");
+        countNode.innerHTML = currentCat.count;
+    }
+};
+
+/*Display the admin view*/
+var adminView = {
+
+    render: function() {
         var adminNode = document.getElementById("adminBtn");
 
-        adminNode.addEventListener("click", function() {
+        adminNode.addEventListener("click", function () {
             controller.toggleView();
         });
 
         //clicking cancel will hide the user input area
-        document.getElementById("cancel").addEventListener("click", function() {
-           view1.hide();
+        document.getElementById("cancel").addEventListener("click", function () {
+            view1.hide();
         });
         //clicking save will update the current cat's data with the form data
         //and also hide the input area
-        document.getElementById("save").addEventListener("click", function() {
+        document.getElementById("save").addEventListener("click", function () {
             var cat = {
                 name: document.getElementById("catAdminName").value,
                 url: document.getElementById("catAdminImg").value,
                 count: document.getElementById("catAdminClk").value
             };
+            //tell controller to update the current cat and also to display the new view
             controller.updateAdminCat(cat);
-            view1.hide();
+            view2.render();
+            view3.render();
+            adminView.hide();
         });
     },
 
@@ -177,32 +208,9 @@ var view1 = {
         var input = document.getElementById("inputArea");
         input.style.display = "none";
     }
-};
 
-/*Display the cat name, image*/
-var view2 = {
-    render: function() {
-        //ask the controller to get the current cat
-        var currentCat = controller.getCurrent();
+}
 
-        //get a handle on name, image, and count nodes
-        var nameNode = document.getElementById("name");
-        var imgNode = document.getElementById("catImg");
-
-        nameNode.innerHTML = currentCat.name;
-        imgNode.setAttribute("src", currentCat.url);
-    }
-};
-
-/*Display the count*/
-var view3 = {
-    render: function() {
-        //ask the controller to get the current cat
-        var currentCat = controller.getCurrent();
-        var countNode = document.getElementById("count");
-        countNode.innerHTML = currentCat.count;
-    }
-};
 
 
 //==============================================================================================================================
