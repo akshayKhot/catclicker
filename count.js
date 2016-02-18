@@ -90,6 +90,9 @@ var controller = {
         model.currentCat.name = cat.name;
         model.currentCat.url = cat.url;
         model.currentCat.count = cat.count;
+        view1.render();
+        view2.render();
+        view3.render();
     }
 
 };
@@ -108,6 +111,8 @@ var view1 = {
         var catHTML = "";
         view1.hide();
 
+        //clear the list before adding new
+        listOfCats.innerHTML = "";
         //loop over the cats
         for(var i=0; i<cats.length; i++) {
             var cat = cats[i];
@@ -134,7 +139,7 @@ var view1 = {
             controller.increment();
         });
 
-        var adminNode = document.getElementById("admin");
+        var adminNode = document.getElementById("adminBtn");
 
         adminNode.addEventListener("click", function() {
             controller.toggleView();
