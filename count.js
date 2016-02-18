@@ -5,6 +5,7 @@
 /*model cats contains our data. In this case, it's an array of cat objects*/
 var model = {
     currentCat: null,
+    isVisible: false,
     cats: [
         {
             name: "Fossie",
@@ -68,6 +69,27 @@ var controller = {
         model.currentCat.count++;
         view2.render();
         view3.render();
+    },
+
+    //hide or show the user input area after user clicks on 'admin' button
+    toggleView: function() {
+
+        //if the view is visible, hide it, else show it
+        if(model.isVisible) {
+            model.isVisible = false;
+            view1.hide();
+        }
+        else {
+            model.isVisible = true;
+            view1.show();
+        }
+    },
+
+    //update the current cat's data after admin fills the form and clicks 'save'
+    updateAdminCat: function(cat) {
+        model.currentCat.name = cat.name;
+        model.currentCat.url = cat.url;
+        model.currentCat.count = cat.count;
     }
 
 };
@@ -84,6 +106,7 @@ var view1 = {
         var cats = controller.getCats();
         //create a string having all the cats html
         var catHTML = "";
+        view1.hide();
 
         //loop over the cats
         for(var i=0; i<cats.length; i++) {
@@ -110,6 +133,44 @@ var view1 = {
         imgNode.addEventListener("click", function(){
             controller.increment();
         });
+
+        var adminNode = document.getElementById("admin");
+
+        adminNode.addEventListener("click", function() {
+            controller.toggleView();
+        });
+
+        //clicking cancel will hide the user input area
+        document.getElementById("cancel").addEventListener("click", function() {
+           view1.hide();
+        });
+        //clicking save will update the current cat's data with the form data
+        //and also hide the input area
+        document.getElementById("save").addEventListener("click", function() {
+            var cat = {
+                name: document.getElementById("catAdminName").value,
+                url: document.getElementById("catAdminImg").value,
+                count: document.getElementById("catAdminClk").value
+            };
+            controller.updateAdminCat(cat);
+            view1.hide();
+        });
+    },
+
+    show: function() {
+        var input = document.getElementById("inputArea");
+        //show the input area
+        input.style.display = "block";
+        //fill out the values for the current cat
+        var currentCat = controller.getCurrent();
+        document.getElementById("catAdminName").value = currentCat.name;
+        document.getElementById("catAdminImg").value = currentCat.url;
+        document.getElementById("catAdminClk").value = currentCat.count;
+    },
+
+    hide: function() {
+        var input = document.getElementById("inputArea");
+        input.style.display = "none";
     }
 };
 
